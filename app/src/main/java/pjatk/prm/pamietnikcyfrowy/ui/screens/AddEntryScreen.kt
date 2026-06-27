@@ -1,23 +1,21 @@
 package pjatk.prm.pamietnikcyfrowy.ui.screens
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.*
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import androidx.compose.ui.layout.ContentScale
+import pjatk.prm.pamietnikcyfrowy.R
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AddEntryScreen(
     title: String,
@@ -31,104 +29,135 @@ fun AddEntryScreen(
     onGetLocationClick: () -> Unit,
     onPickPhotoClick: () -> Unit,
     onToggleRecordingClick: () -> Unit,
-    onSaveClick: () -> Unit
+    onSaveClick: () -> Unit,
+    onBackClick: () -> Unit
 ) {
-    Surface(modifier = Modifier.fillMaxSize()) {
+    val isSaveEnabled = title.isNotBlank() && note.isNotBlank()
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = { Text(stringResource(R.string.add_title)) },
+                navigationIcon = {
+                    IconButton(onClick = onBackClick) {
+                        Icon(
+                            Icons.Default.ArrowBack,
+                            stringResource(R.string.desc_back)
+                        )
+                    }
+                }
+            )
+        },
+        bottomBar = {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .navigationBarsPadding(),
+                shape = RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp),
+                elevation = CardDefaults.cardElevation(6.dp)
+            ) {
+                Button(
+                    onClick = onSaveClick,
+                    enabled = isSaveEnabled,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    shape = RoundedCornerShape(12.dp)
+                ) { Text(stringResource(R.string.add_btn_save)) }
+            }
+        }
+    ) { innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(24.dp),
-            verticalArrangement = Arrangement.Top
+                .padding(innerPadding)
+                .padding(horizontal = 16.dp, vertical = 12.dp)
+                .verticalScroll(rememberScrollState()),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            Text(
-                text = "Dodaj wpis",
-                style = MaterialTheme.typography.headlineSmall
-            )
-
-            Spacer(modifier = Modifier.height(24.dp))
-
+            ElevatedCard(modifier = Modifier.fillMaxWidth()) {
+                Text(
+                    stringResource(R.string.add_info),
+                    style = MaterialTheme.typography.bodyMedium,
+                    modifier = Modifier.padding(14.dp)
+                )
+            }
             OutlinedTextField(
                 value = title,
                 onValueChange = onTitleChange,
                 modifier = Modifier.fillMaxWidth(),
-                label = { Text("Tytuł") },
+                label = { Text(stringResource(R.string.add_field_title)) },
                 singleLine = true
             )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
             OutlinedTextField(
                 value = note,
                 onValueChange = onNoteChange,
                 modifier = Modifier.fillMaxWidth(),
-                label = { Text("Treść notatki") },
+                label = { Text(stringResource(R.string.add_field_note)) },
                 minLines = 5
             )
-
-            Spacer(modifier = Modifier.height(16.dp))
-
             OutlinedTextField(
                 value = city,
                 onValueChange = {},
                 modifier = Modifier.fillMaxWidth(),
-                label = { Text("Miasto") },
+                label = { Text(stringResource(R.string.add_field_city)) },
                 readOnly = true,
                 singleLine = true
             )
 
-            Spacer(modifier = Modifier.height(12.dp))
-
             Button(
                 onClick = onGetLocationClick,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(12.dp)
             ) {
-                Text("Pobierz moją lokalizację")
+                Icon(Icons.Default.LocationOn, null, modifier = Modifier.size(18.dp)); Spacer(
+                Modifier.width(8.dp)
+            ); Text(stringResource(R.string.add_btn_location))
             }
-
-            Spacer(modifier = Modifier.height(12.dp))
-
             Button(
                 onClick = onPickPhotoClick,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(12.dp)
             ) {
-                Text("Wybierz zdjęcie")
+                Icon(
+                    Icons.Default.Photo,
+                    null,
+                    modifier = Modifier.size(18.dp)
+                ); Spacer(Modifier.width(8.dp)); Text(stringResource(R.string.add_btn_photo))
             }
-
-            Spacer(modifier = Modifier.height(12.dp))
-
             Button(
                 onClick = onToggleRecordingClick,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(12.dp),
+                colors = if (isRecording) ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error) else ButtonDefaults.buttonColors()
             ) {
-                Text(if (isRecording) "Zatrzymaj nagrywanie" else "Nagraj głos")
+                Icon(
+                    Icons.Default.Mic,
+                    null,
+                    modifier = Modifier.size(18.dp)
+                ); Spacer(Modifier.width(8.dp)); Text(stringResource(if (isRecording) R.string.add_btn_record_stop else R.string.add_btn_record_start))
             }
 
-            Spacer(modifier = Modifier.height(16.dp))
-
-            if (photoUri != null) {
+            if (photoUri != null) ElevatedCard(modifier = Modifier.fillMaxWidth()) {
                 AsyncImage(
                     model = photoUri,
-                    contentDescription = "Zdjęcie wpisu",
+                    contentDescription = null,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(220.dp),
+                        .padding(8.dp),
                     contentScale = ContentScale.Crop
                 )
             }
-
-            if (audioUri != null) {
-                Spacer(modifier = Modifier.height(12.dp))
-                Text(text = "Nagranie zapisane", style = MaterialTheme.typography.bodyMedium)
-            }
-
-            Spacer(modifier = Modifier.height(24.dp))
-
-            Button(
-                onClick = onSaveClick,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("Zapisz wpis")
-            }
+            if (audioUri != null) Text(
+                stringResource(R.string.add_audio_saved),
+                style = MaterialTheme.typography.bodyMedium
+            )
+            if (!isSaveEnabled) Text(
+                stringResource(R.string.add_warning_empty),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.outline
+            )
+            Spacer(modifier = Modifier.height(72.dp))
         }
     }
 }

@@ -14,10 +14,9 @@ import com.google.android.gms.location.LocationServices
 
 class GeofenceManager(private val context: Context) {
 
-    private val geofencingClient: GeofencingClient =
-        LocationServices.getGeofencingClient(context)
+    private val geofencingClient: GeofencingClient = LocationServices.getGeofencingClient(context)
 
-    private val geofencePendingIntent: PendingIntent by lazy {
+    private val pendingIntent: PendingIntent by lazy {
         val intent = Intent(context, GeofenceReceiver::class.java)
         PendingIntent.getBroadcast(
             context,
@@ -34,12 +33,11 @@ class GeofenceManager(private val context: Context) {
         longitude: Double,
         radius: Float = 200f
     ) {
-        val hasPermission = ContextCompat.checkSelfPermission(
-            context,
-            Manifest.permission.ACCESS_FINE_LOCATION
-        ) == PackageManager.PERMISSION_GRANTED
-
-        if (!hasPermission) return
+        if (ContextCompat.checkSelfPermission(
+                context,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) return
 
         val geofence = Geofence.Builder()
             .setRequestId(requestId)
@@ -53,10 +51,6 @@ class GeofenceManager(private val context: Context) {
             .addGeofence(geofence)
             .build()
 
-        geofencingClient.addGeofences(request, geofencePendingIntent)
-    }
-
-    fun removeGeofence() {
-        geofencingClient.removeGeofences(geofencePendingIntent)
+        geofencingClient.addGeofences(request, pendingIntent)
     }
 }

@@ -1,3 +1,88 @@
 <resources>
-    <string name="app_name">PamietnikCyfrowy</string>
+    <string name="app_name">Pamiętnik Cyfrowy</string>
+
+    <string name="pin_enter">Wprowadź PIN</string>
+    <string name="pin_set_new">Ustaw swój nowy PIN</string>
+    <string name="pin_label">PIN</string>
+    <string name="pin_open_button">Otwórz pamiętnik</string>
+    <string name="pin_save_button">Zapisz i ustaw PIN</string>
+    <string name="pin_error_wrong">Niepoprawny PIN!</string>
+    <string name="pin_error_short">PIN musi mieć co najmniej 4 cyfry</string>
+
+    <string name="home_title">Pamiętnik Cyfrowy</string>
+    <string name="home_welcome">Witaj</string>
+    <string name="home_subtitle">Twoje wpisy i wspomnienia w jednym miejscu.</string>
+    <string name="home_btn_add">  Dodaj</string>
+    <string name="home_btn_map">  Mapa</string>
+    <string name="home_chip_photo">Zdjęcie</string>
+    <string name="home_chip_audio">Audio</string>
+    <string name="home_empty_title">Brak wpisów</string>
+    <string name="home_empty_desc">Dodaj pierwszy wpis, aby rozpocząć.</string>
+
+    <string name="add_title">Nowy wpis</string>
+    <string name="add_info">Uzupełnij dane wpisu i dodaj multimedia.</string>
+    <string name="add_field_title">Tytuł</string>
+    <string name="add_field_note">Treść notatki</string>
+    <string name="add_field_city">Miasto</string>
+    <string name="add_btn_location">  Pobierz lokalizację</string>
+    <string name="add_btn_photo">  Dodaj zdjęcie</string>
+    <string name="add_btn_record_start">  Nagraj głos</string>
+    <string name="add_btn_record_stop">  Zatrzymaj nagrywanie</string>
+    <string name="add_audio_saved">Nagranie zapisane</string>
+    <string name="add_warning_empty">Uzupełnij tytuł i treść, aby zapisać wpis.</string>
+    <string name="add_btn_save">Zapisz wpis</string>
+
+    <string name="edit_title">Edycja wpisu</string>
+    <string name="edit_info">Zmień dane wpisu i zapisz aktualizację.</string>
+    <string name="edit_btn_location">  Aktualizuj lokalizację</string>
+    <string name="edit_btn_photo">  Zmień zdjęcie</string>
+    <string name="edit_btn_record_start">  Nagraj nowe audio</string>
+    <string name="edit_btn_record_stop">  Zatrzymaj nagrywanie</string>
+    <string name="edit_warning_empty">Tytuł i treść nie mogą być puste.</string>
+    <string name="edit_btn_save">Zapisz zmiany</string>
+
+    <string name="map_title">Mapa wpisów</string>
+    <string name="map_count">Lokalizacje na mapie: %1$d</string>
+    <string name="map_empty_title">Brak wpisów z lokalizacją.\nDodaj lokalizację przy tworzeniu wpisu.</string>
+    <string name="unknown_city">Nieznane miasto</string>
+    <string name="btn_play_audio">  Odtwórz nagranie</string>
+
+    <string name="desc_back">Wróć</string>
+    <string name="desc_delete">Usuń wpis</string>
+    <string name="desc_entry_photo">Zdjęcie wpisu</string>
+    <string name="desc_mini_map">Mini mapka lokalizacji</string>
+
+    <string name="notification_channel_name">Alerty lokalizacji</string>
+    <string name="notification_title">Jesteś blisko wpisu</string>
+    <string name="notification_content">Dotarłeś do miejsca z zapisanego wpisu.</string>
+
+    <string name="draw_title">Rysowanie po zdjęciu</string>
+    <string name="draw_btn_save">Zapisz zdjęcie</string>
+    <string name="draw_btn_clear">Wyczyść</string>
+    <string name="desc_cancel">Anuluj</string>
+    <string name="draw_mode_draw">Rysuj</string>
+    <string name="draw_mode_text">Tekst</string>
+    <string name="draw_dialog_title">Dodaj tekst na zdjęciu</string>
+    <string name="draw_dialog_label">Twój opis</string>
+    <string name="draw_dialog_add">Dodaj</string>
+    <string name="draw_dialog_cancel">Anuluj</string>
+    <string name="draw_btn_undo">Cofnij</string>
+    <string name="draw_btn_color">Kolor</string>
+
+    <string name="pin_setting_title">Ustaw nowy PIN i zabezpieczenie</string>
+    <string name="pin_unlocking_title">Wprowadź kod PIN</string>
+    <string name="pin_recovery_title">Odzyskiwanie dostępu</string>
+    <string name="pin_label_setting">Kod PIN (min. 4 cyfry)</string>
+    <string name="pin_question_label">Twoje pytanie ratunkowe (np. Imię psa)</string>
+    <string name="pin_answer_label">Odpowiedź na pytanie</string>
+    <string name="pin_recovery_question">Pytanie: %1$s</string>
+    <string name="pin_recovery_answer_label">Twoja odpowiedź</string>
+    <string name="pin_btn_save_security">Zapisz zabezpieczenia</string>
+    <string name="pin_btn_unlock">Odblokuj Pamiętnik</string>
+    <string name="pin_btn_reset">Zresetuj PIN</string>
+    <string name="pin_btn_forgot">Zapomniałeś PIN-u?</string>
+    <string name="pin_btn_back_to_login">Wróć do logowania</string>
+    <string name="pin_error_fill_all">Wypełnij wszystkie pola (PIN min. 4 znaki)</string>
+    <string name="pin_msg_reset_success">Pomyślnie zresetowano! Ustaw nowy kod PIN.</string>
+    <string name="pin_error_wrong_answer">Błędna odpowiedź na pytanie ratunkowe</string>
 </resources>

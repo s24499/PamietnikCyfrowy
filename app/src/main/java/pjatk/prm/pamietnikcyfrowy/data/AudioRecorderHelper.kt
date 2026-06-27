@@ -39,6 +39,4 @@ class AudioRecorderHelper(private val context: Context) {
             null
         }
     }
-
-    fun isRecording(): Boolean = recorder != null
 }
